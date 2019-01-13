@@ -1,10 +1,1 @@
 /* Diva custom and fixes for common Omeka themes */
-@media screen {
-    body .diva-container {
-        font-size: initial;
-        line-height: initial;
-    }
-    .diva-viewer .manifest-info .window-manifest-title {
-        line-height: initial;
-    }
-}
