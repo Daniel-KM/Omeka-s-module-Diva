@@ -1,47 +1,50 @@
-Mirador Viewer (module for Omeka S)
-===================================
+Diva Viewer (module for Omeka S)
+================================
 
-[Mirador Viewer] is a module for [Omeka S] that integrates [Mirador], an
-advanced online viewer for images, so it can display books, images, maps, etc.
-via the [IIIF] standard.
+[Diva Viewer] is a module for [Omeka S] that integrates [Diva], a Document Image
+Viewer with AJAX, that is an advanced online viewer for images, so it can
+display books, images, maps, etc. via the [IIIF] standard.
 
-[Mirador] is an open-source, web based, multi-window image viewing platform with
-the ability to zoom, display, compare and annotate images from around the world.
-It's configurable and fully extensible via plugins.
+[Diva] is a web-based document viewer optimized for high-resolution image
+collections. Using Diva you can display your images at the largest resolution.
+It has a full API and plugin system to help integrate and extend Diva to suit
+your needs.
 
 It uses the resources of any [IIIF] compliant server. The full specification of
 the "International Image Interoperability Framework" standard is supported
 (level 2). If you don’t have an [IIPImage] server, Omeka S can be one! Just
 install the module [IIIF Server].
 
-It is an alternative to the [Universal Viewer] or the lighter [Diva Viewer].
+It is an alternative to the [Universal Viewer] or the [Mirador Viewer].
 
 
 Installation
 ------------
 
-The module uses an external js library [Mirador], so use the release zip to
+The module uses an external js library [Diva], so use the release zip to
 install it, or use and init the source.
 
 * From the zip
 
-Download the last release [`Mirador.zip`] from the list of releases (the
+Download the last release [`Diva.zip`] from the list of releases (the
 master does not contain the dependency), and uncompress it in the `modules`
 directory.
 
 * From the source and for development:
 
 If the module was installed from the source, rename the name of the folder of
-the module to `Mirador`, and go to the root module, and run:
+the module to `Diva`, and go to the root module, and run:
 
 ```
-    composer install
+    npm install
+    gulp install
 ```
 
 The next times:
 
 ```
-    composer update
+    npm update
+    gulp update
 ```
 
 * Configuration
@@ -59,7 +62,7 @@ Only one option can be set in the main config (the manifest property, if any).
 The other can be set differently for each site, in the site settings:
 
 - in site settings for the integration of the player;
-- via the theme of the site (asset/vendor/mirador).
+- via the theme of the site (asset/vendor/diva).
 
 See below the notes for more info.
 
@@ -68,28 +71,28 @@ Usage
 -----
 
 If the [IIIF Server] is installed, all resources of Omeka S are automatically
-available by Mirador.
+available by Diva.
 
-The viewer is always available at `http://www.example.com/item-set/{item-set id}/mirador`
-and `http://www.example.com/item/{item id}/mirador`. Furthermore, it is
+The viewer is always available at `http://www.example.com/item-set/{item-set id}/diva`
+and `http://www.example.com/item/{item id}/diva`. Furthermore, it is
 automatically embedded in "item-set/{id}" and "item/{id}" show and/or browse
 pages. This can be disabled in the settings of the site. Finally, a block layout
 is available to add the viewer in any standard page.
 
-To embed Mirador somewhere else, just use the helper:
+To embed Diva somewhere else, just use the helper:
 
 ```php
     // Display the viewer with the specified item set.
-    echo $this->mirador($itemSet);
+    echo $this->diva($itemSet);
 
     // Display the viewer with the specified item and specified options.
-    echo $this->mirador($item, array(
+    echo $this->diva($item, array(
         'class' => 'my-class',
         'style' => 'width: 40%; height: 400px;',
     ));
 
     // Display multiple resources (items and/or item sets).
-    echo $this->mirador($resources);
+    echo $this->diva($resources);
 ```
 
 
@@ -130,42 +133,38 @@ and, more generally, to use and operate it in the same conditions of security.
 This Agreement may be freely reproduced and published, provided it is not
 altered, and that no provisions are either added or removed herefrom.
 
-[Mirador] is published under the [Apache 2] licence.
+[Diva] is published under the [ISC] licence.
 
 
 Copyright
 ---------
 
-Widget [Mirador]:
+Widget [Diva]:
 
-* Copyright 2018 The Board of Trustees of the Leland Stanford Junior University
+* See https://ddmal.github.io/diva.js/about
 
-Module Mirador for Omeka S:
+Module Diva for Omeka S:
 
 * Copyright Daniel Berthereau, 2018-2019
 
-First version of this module was built for [Fachhochschule Nordwestschweiz],
-University of Applied Sciences and Arts, Basel Academy of Music, Academy of Music,
-[Schola Cantorum Basiliensis].
+First version of this module was built for the University of California.
 
 
-[Mirador Viewer]: https://github.com/Daniel-KM/Omeka-S-module-Mirador
-[Mirador]: https://projectmirador.org
+[Diva Viewer]: https://github.com/Daniel-KM/Omeka-S-module-Diva
+[Diva]: https://ddmal.github.io/diva.js
 [Omeka S]: https://omeka.org/s
 [Omeka]: https://omeka.org
 [IIIF Server]: https://github.com/Daniel-KM/Omeka-S-module-IiifServer
 [IIIF]: http://iiif.io
 [IIPImage]: http://iipimage.sourceforge.net
 [Universal Viewer]: https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer
-[Diva Viewer]: https://github.com/Daniel-KM/Omeka-S-module-Diva
-[`Mirador.zip`]: https://github.com/Daniel-KM/Omeka-S-module-Mirador/releases
+[Mirador Viewer]: https://github.com/Daniel-KM/Omeka-S-module-Mirador
+[`Diva.zip`]: https://github.com/Daniel-KM/Omeka-S-module-Diva/releases
 [iiif specifications]: http://iiif.io/api/
-[module issues]: https://github.com/Daniel-KM/Omeka-S-module-Mirador/issues
+[module issues]: https://github.com/Daniel-KM/Omeka-S-module-Diva/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 [FSF]: https://www.fsf.org
 [OSI]: http://opensource.org
-[Apache 2]: http://www.apache.org/licenses/LICENSE-2.0
-[Fachhochschule Nordwestschweiz]: https://www.fhnw.ch
-[Schola Cantorum Basiliensis]: https://www.fhnw.ch/en/about-fhnw/schools/music/schola-cantorum-basiliensis
+[ISC]: https://www.isc.org/downloads/software-support-policy/isc-license/
 [Daniel-KM]: https://github.com/Daniel-KM "Daniel Berthereau"
