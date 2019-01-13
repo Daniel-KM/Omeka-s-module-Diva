@@ -16,6 +16,7 @@ class SiteSettingsFieldset extends Fieldset
 
         $this->setLabel('Diva Viewer'); // @translate
 
+        /*
         $this->add([
             'name' => 'diva_append_item_set_show',
             'type' => Element\Checkbox::class,
@@ -27,6 +28,7 @@ class SiteSettingsFieldset extends Fieldset
                 'id' => 'diva_append_item_set_show',
             ],
         ]);
+        */
 
         $this->add([
             'name' => 'diva_append_item_show',
@@ -40,6 +42,7 @@ class SiteSettingsFieldset extends Fieldset
             ],
         ]);
 
+        /*
         $this->add([
             'name' => 'diva_append_item_set_browse',
             'type' => Element\Checkbox::class,
@@ -52,6 +55,7 @@ class SiteSettingsFieldset extends Fieldset
                 'disabled' => !$iiifServerIsActive,
             ],
         ]);
+        */
 
         $this->add([
             'name' => 'diva_append_item_browse',

@@ -79,17 +79,17 @@ Usage
 If the [IIIF Server] is installed, all resources of Omeka S are automatically
 available by Diva.
 
-The viewer is always available at `http://www.example.com/item-set/{item-set id}/diva`
-and `http://www.example.com/item/{item id}/diva`. Furthermore, it is
-automatically embedded in "item-set/{id}" and "item/{id}" show and/or browse
-pages. This can be disabled in the settings of the site. Finally, a block layout
-is available to add the viewer in any standard page.
+The viewer is always available at `http://www.example.com/item/{item id}/diva`.
+Furthermore, it is automatically embedded "item/{id}" show and/or browse pages.
+This can be disabled in the settings of the site. Finally, a block layout is
+available to add the viewer in any standard page.
 
 To embed Diva somewhere else, just use the helper:
 
 ```php
     // Display the viewer with the specified item set.
-    echo $this->diva($itemSet);
+    // Diva doesn't support this feature.
+    // echo $this->diva($itemSet);
 
     // Display the viewer with the specified item and specified options.
     echo $this->diva($item, array(
@@ -98,7 +98,8 @@ To embed Diva somewhere else, just use the helper:
     ));
 
     // Display multiple resources (items and/or item sets).
-    echo $this->diva($resources);
+    // Diva does not support this feature.
+    // echo $this->diva($resources);
 ```
 
 

@@ -64,9 +64,9 @@ return [
             'diva_manifest_property' => '',
         ],
         'site_settings' => [
-            'diva_append_item_set_show' => true,
+            // 'diva_append_item_set_show' => true,
             'diva_append_item_show' => true,
-            'diva_append_item_set_browse' => false,
+            // 'diva_append_item_set_browse' => false,
             'diva_append_item_browse' => false,
             'diva_class' => '',
             'diva_style' => '',

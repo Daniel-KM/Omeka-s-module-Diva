@@ -85,11 +85,13 @@ class Module extends AbstractModule
             [$this, 'handleViewBrowseAfterItem']
         );
 
+        /*
         $sharedEventManager->attach(
             'Omeka\Controller\Site\ItemSet',
             'view.browse.after',
             [$this, 'handleViewBrowseAfterItemSet']
         );
+        */
 
         $sharedEventManager->attach(
             'Omeka\Controller\Site\Item',
