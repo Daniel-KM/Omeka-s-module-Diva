@@ -3,7 +3,7 @@
 namespace Diva\Service\ViewHelper;
 
 use Interop\Container\ContainerInterface;
-use Diva\View\Helper\Mirador;
+use Diva\View\Helper\Diva;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**

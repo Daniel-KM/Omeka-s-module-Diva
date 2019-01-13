@@ -31,7 +31,7 @@ class Module extends AbstractModule
 
     public function install(ServiceLocatorInterface $serviceLocator)
     {
-        $js = __DIR__ . '/asset/vendor/diva/mirador.min.js';
+        $js = __DIR__ . '/asset/vendor/diva/js/diva.min.js';
         if (!file_exists($js)) {
             $t = $serviceLocator->get('MvcTranslator');
             throw new ModuleCannotInstallException(
@@ -219,13 +219,13 @@ class Module extends AbstractModule
         $siteSettings = $services->get('Omeka\Settings\Site');
         if ($siteSettings->get(
             'diva_append_item_set_show',
-            $config['diva']['site_settings']['mirador_append_item_set_show']
+            $config['diva']['site_settings']['diva_append_item_set_show']
         )) {
             echo $view->diva($view->itemSet);
         } elseif ($this->iiifServerIsActive()
             && $siteSettings->get(
                 'diva_append_item_browse',
-                $config['diva']['site_settings']['mirador_append_item_browse']
+                $config['diva']['site_settings']['diva_append_item_browse']
             )
         ) {
             echo $view->diva($view->items);
@@ -244,7 +244,7 @@ class Module extends AbstractModule
         $siteSettings = $services->get('Omeka\Settings\Site');
         if ($siteSettings->get(
             'diva_append_item_set_browse',
-            $config['diva']['site_settings']['mirador_append_item_set_browse']
+            $config['diva']['site_settings']['diva_append_item_set_browse']
         )) {
             echo $view->diva($view->itemSets);
         }
@@ -258,7 +258,7 @@ class Module extends AbstractModule
         $siteSettings = $services->get('Omeka\Settings\Site');
         if ($siteSettings->get(
             'diva_append_item_show',
-            $config['diva']['site_settings']['mirador_append_item_show']
+            $config['diva']['site_settings']['diva_append_item_show']
         )) {
             echo $view->diva($view->item);
         }
