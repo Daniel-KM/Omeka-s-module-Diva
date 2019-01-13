@@ -83,8 +83,7 @@ class SiteSettingsFieldset extends Fieldset
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Inline style', // @translate
-                'info' => 'If any, this style will be added to the main div of the Diva Viewer.' // @translate
-                . ' ' . 'The display and height may be required.', // @translate
+                'info' => 'If any, this style will be added to the main div of the Diva Viewer.', // @translate
             ],
             'attributes' => [
                 'id' => 'diva_style',

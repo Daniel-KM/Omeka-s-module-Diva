@@ -193,30 +193,26 @@ class Diva extends AbstractHelper
             : $view->siteSetting('diva_locale', $this->defaultOptions['locale']);
 
         $view->headLink()
-            ->prependStylesheet($view->assetUrl('vendor/diva/css/diva.min.css', 'Diva'))
-            ->prependStylesheet($view->assetUrl('css/diva.css', 'Diva'));
+            ->appendStylesheet($view->assetUrl('vendor/diva/css/diva.min.css', 'Diva'))
+            ->appendStylesheet($view->assetUrl('css/diva.css', 'Diva'));
         $view->headScript()->appendFile($view->assetUrl('vendor/diva/js/diva.min.js', 'Diva'));
-
         $config = [
             'id' => "diva",
-            'buildPath' => $view->assetUrl('vendor/diva/', 'Diva', false, false),
+            'config' => [
+                'zoomLevel' => 0,
+            ],
             'language' => $locale,
         ];
 
         switch($resourceName) {
             case 'items' :
-                $config += [
-                    'data' => [[
-                        'manifestUri' => $urlManifest,
-                        //'location' => "My Repository",
-                    ]],
-                    'windowObjects' => [['loadedManifest' => $urlManifest]]
+                $config['config'] += [
+                    'objectData' => $urlManifest,
                 ];
                 break;
             case 'item_sets' :
-                $config += [
-                    'data' => [['collectionUri' => $urlManifest]],
-                    'openManifestsPage' => true,
+                $config['config'] += [
+                    'objectData' => $urlManifest,
                 ];
                 break;
         }

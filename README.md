@@ -17,6 +17,10 @@ install the module [IIIF Server].
 
 It is an alternative to the [Universal Viewer] or the [Mirador Viewer].
 
+Note: unlike Universal Viewer and Mirador, Diva uses always the tiles. So if you
+use the module IIIF server as image server, all images should be tiled first,
+else the display of images may be slow.
+
 
 Installation
 ------------
@@ -62,7 +66,9 @@ Only one option can be set in the main config (the manifest property, if any).
 The other can be set differently for each site, in the site settings:
 
 - in site settings for the integration of the player;
-- via the theme of the site (asset/vendor/diva).
+- via the theme of the site: copy file `view/common/helper/diva.phtml` in your
+  theme and customize it;
+- via the theme of the site and the assets (`asset/vendor/diva).
 
 See below the notes for more info.
 

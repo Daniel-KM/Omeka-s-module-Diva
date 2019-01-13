@@ -69,7 +69,7 @@ return [
             'diva_append_item_set_browse' => false,
             'diva_append_item_browse' => false,
             'diva_class' => '',
-            'diva_style' => 'display: block; width: 90%; height: 600px; margin: 1em 5%; position: relative;',
+            'diva_style' => '',
             'diva_locale' => 'en',
         ],
     ],
