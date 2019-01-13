@@ -1,12 +1,12 @@
 <?php
 
-namespace Mirador;
+namespace Diva;
 
 use Omeka\Module\AbstractModule;
 use Omeka\Module\Exception\ModuleCannotInstallException;
 use Omeka\Module\Manager as ModuleManager;
-use Mirador\Form\ConfigForm;
-use Mirador\Form\SiteSettingsFieldset;
+use Diva\Form\ConfigForm;
+use Diva\Form\SiteSettingsFieldset;
 use Zend\EventManager\Event;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Mvc\Controller\AbstractController;
@@ -26,16 +26,16 @@ class Module extends AbstractModule
         parent::onBootstrap($event);
 
         $acl = $this->getServiceLocator()->get('Omeka\Acl');
-        $acl->allow(null, 'Mirador\Controller\Player');
+        $acl->allow(null, 'Diva\Controller\Player');
     }
 
     public function install(ServiceLocatorInterface $serviceLocator)
     {
-        $js = __DIR__ . '/asset/vendor/mirador/mirador.min.js';
+        $js = __DIR__ . '/asset/vendor/diva/mirador.min.js';
         if (!file_exists($js)) {
             $t = $serviceLocator->get('MvcTranslator');
             throw new ModuleCannotInstallException(
-                $t->translate('The Mirador library should be installed.') // @translate
+                $t->translate('The Diva library should be installed.') // @translate
                     . ' ' . $t->translate('See module’s installation documentation.') // @translate
             );
         }
@@ -124,7 +124,7 @@ class Module extends AbstractModule
         $html .= $this->iiifServerIsActive()
             ? $view->translate('The IIIF Server is active, so when no url is set, the viewer will use the standard routes.') // @translate
             : ($view->translate('The IIIF Server is not active, so when no url is set, the viewer won’t be displayed.') // @translate
-                . ' ' . $view->translate('Furthermore, the Mirador Viewer can’t display lists of items.')); // @translate
+                . ' ' . $view->translate('Furthermore, the Diva Viewer can’t display lists of items.')); // @translate
         $html .= '</p>';
         $html .= '<p>'
             . $view->translate('The viewer itself can be basically configured in settings of each site, or in the theme.') // @translate
@@ -181,12 +181,12 @@ class Module extends AbstractModule
     public function handleSiteSettingsFilters(Event $event)
     {
         $inputFilter = $event->getParam('inputFilter');
-        $inputFilter->get('mirador')->add([
-            'name' => 'mirador_append_item_set_browse',
+        $inputFilter->get('diva')->add([
+            'name' => 'diva_append_item_set_browse',
             'required' => false,
         ]);
-        $inputFilter->get('mirador')->add([
-            'name' => 'mirador_append_item_browse',
+        $inputFilter->get('diva')->add([
+            'name' => 'diva_append_item_browse',
             'required' => false,
         ]);
     }
@@ -218,17 +218,17 @@ class Module extends AbstractModule
         $config = $services->get('Config');
         $siteSettings = $services->get('Omeka\Settings\Site');
         if ($siteSettings->get(
-            'mirador_append_item_set_show',
-            $config['mirador']['site_settings']['mirador_append_item_set_show']
+            'diva_append_item_set_show',
+            $config['diva']['site_settings']['mirador_append_item_set_show']
         )) {
-            echo $view->mirador($view->itemSet);
+            echo $view->diva($view->itemSet);
         } elseif ($this->iiifServerIsActive()
             && $siteSettings->get(
-                'mirador_append_item_browse',
-                $config['mirador']['site_settings']['mirador_append_item_browse']
+                'diva_append_item_browse',
+                $config['diva']['site_settings']['mirador_append_item_browse']
             )
         ) {
-            echo $view->mirador($view->items);
+            echo $view->diva($view->items);
         }
     }
 
@@ -243,10 +243,10 @@ class Module extends AbstractModule
         $config = $services->get('Config');
         $siteSettings = $services->get('Omeka\Settings\Site');
         if ($siteSettings->get(
-            'mirador_append_item_set_browse',
-            $config['mirador']['site_settings']['mirador_append_item_set_browse']
+            'diva_append_item_set_browse',
+            $config['diva']['site_settings']['mirador_append_item_set_browse']
         )) {
-            echo $view->mirador($view->itemSets);
+            echo $view->diva($view->itemSets);
         }
     }
 
@@ -257,10 +257,10 @@ class Module extends AbstractModule
         $config = $services->get('Config');
         $siteSettings = $services->get('Omeka\Settings\Site');
         if ($siteSettings->get(
-            'mirador_append_item_show',
-            $config['mirador']['site_settings']['mirador_append_item_show']
+            'diva_append_item_show',
+            $config['diva']['site_settings']['mirador_append_item_show']
         )) {
-            echo $view->mirador($view->item);
+            echo $view->diva($view->item);
         }
     }
 

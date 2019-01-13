@@ -7,11 +7,11 @@
     "content-hash": "77fea8693f2d1e4af3d8fe300d72cc1c",
     "packages": [
         {
-            "name": "asset/mirador",
+            "name": "asset/diva",
             "version": "2.6.0",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ProjectMirador/mirador/releases/download/v2.6.0/build.zip",
+                "url": "https://github.com/ProjectDiva/diva/releases/download/v2.6.0/build.zip",
                 "reference": null,
                 "shasum": null
             },

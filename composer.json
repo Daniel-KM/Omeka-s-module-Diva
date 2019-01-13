@@ -3,10 +3,10 @@
     {
       "type": "package",
       "package": {
-        "name": "asset/mirador",
+        "name": "asset/diva",
         "version": "2.6.0",
         "dist": {
-          "url": "https://github.com/ProjectMirador/mirador/releases/download/v2.6.0/build.zip",
+          "url": "https://github.com/ProjectDiva/diva/releases/download/v2.6.0/build.zip",
           "type": "zip"
         }
       }
@@ -15,7 +15,7 @@
 
   "require": {
     "slowprog/composer-copy-file": "~0.3",
-    "asset/mirador": "*"
+    "asset/diva": "*"
   },
 
   "scripts": {
@@ -29,7 +29,7 @@
 
   "extra": {
     "copy-file": {
-      "vendor/asset/mirador/mirador/": "asset/vendor/mirador/"
+      "vendor/asset/diva/mirador/": "asset/vendor/mirador/"
     }
   }
 }

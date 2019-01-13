@@ -27,13 +27,13 @@
  * knowledge of the CeCILL license and that you accept its terms.
  */
 
-namespace Mirador\View\Helper;
+namespace Diva\View\Helper;
 
 use Omeka\Api\Representation\AbstractResourceEntityRepresentation;
 use Omeka\Site\Theme\Theme;
 use Zend\View\Helper\AbstractHelper;
 
-class Mirador extends AbstractHelper
+class Diva extends AbstractHelper
 {
     /**
      * These options are used only when the player is called outside of a site
@@ -64,7 +64,7 @@ class Mirador extends AbstractHelper
     }
 
     /**
-     * Get the Mirador Viewer for the provided resource.
+     * Get the Diva Viewer for the provided resource.
      *
      * Proxies to {@link render()}.
      *
@@ -74,7 +74,7 @@ class Mirador extends AbstractHelper
      *   - (string) locale
      *   - (string) style
      *   - (string) config
-     * @return string. The html string corresponding to the Mirador.
+     * @return string. The html string corresponding to the Diva.
      */
     public function __invoke($resource, $options = [])
     {
@@ -113,7 +113,7 @@ class Mirador extends AbstractHelper
 
         // Determine the url of the manifest from a field in the metadata.
         $urlManifest = '';
-        $manifestProperty = $view->setting('mirador_manifest_property');
+        $manifestProperty = $view->setting('diva_manifest_property');
         if ($manifestProperty) {
             $urlManifest = $resource->value($manifestProperty);
             if ($urlManifest) {
@@ -188,7 +188,7 @@ class Mirador extends AbstractHelper
     }
 
     /**
-     * Render a mirador viewer for a url, according to options.
+     * Render a diva viewer for a url, according to options.
      *
      * @param string $urlManifest
      * @param array $options
@@ -206,27 +206,27 @@ class Mirador extends AbstractHelper
 
         $class = isset($options['class'])
             ? $options['class']
-            : $view->siteSetting('mirador_class', $this->defaultOptions['class']);
+            : $view->siteSetting('diva_class', $this->defaultOptions['class']);
         if (!empty($class)) {
             $class = ' ' . $class;
         }
 
         $style = isset($options['style'])
             ? $options['style']
-            : $view->siteSetting('mirador_style', $this->defaultOptions['style']);
+            : $view->siteSetting('diva_style', $this->defaultOptions['style']);
 
         $locale = isset($options['locale'])
             ? $options['locale']
-            : $view->siteSetting('mirador_locale', $this->defaultOptions['locale']);
+            : $view->siteSetting('diva_locale', $this->defaultOptions['locale']);
 
         $view->headLink()
-            ->prependStylesheet($view->assetUrl('vendor/mirador/css/mirador-combined.min.css', 'Mirador'))
-            ->prependStylesheet($view->assetUrl('css/mirador.css', 'Mirador'));
-        $view->headScript()->appendFile($view->assetUrl('vendor/mirador/mirador.min.js', 'Mirador'));
+            ->prependStylesheet($view->assetUrl('vendor/diva/css/mirador-combined.min.css', 'Diva'))
+            ->prependStylesheet($view->assetUrl('css/diva.css', 'Diva'));
+        $view->headScript()->appendFile($view->assetUrl('vendor/diva/mirador.min.js', 'Diva'));
 
         $config = [
-            'id' => "mirador",
-            'buildPath' => $view->assetUrl('vendor/mirador/', 'Mirador', false, false),
+            'id' => "diva",
+            'buildPath' => $view->assetUrl('vendor/diva/', 'Diva', false, false),
             'language' => $locale,
         ];
 
@@ -248,7 +248,7 @@ class Mirador extends AbstractHelper
                 break;
         }
 
-        return $view->partial('common/helper/mirador', [
+        return $view->partial('common/helper/diva', [
             'class' => $class,
             'style' => $style,
             'config' => $config,

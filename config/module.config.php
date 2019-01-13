@@ -1,5 +1,5 @@
 <?php
-namespace Mirador;
+namespace Diva;
 
 return [
     'view_manager' => [
@@ -9,17 +9,17 @@ return [
     ],
     'view_helpers' => [
         'factories' => [
-            'mirador' => Service\ViewHelper\MiradorFactory::class,
+            'diva' => Service\ViewHelper\DivaFactory::class,
         ],
     ],
     'block_layouts' => [
         'invokables' => [
-            'mirador' => Site\BlockLayout\Mirador::class,
+            'diva' => Site\BlockLayout\Diva::class,
         ],
     ],
     'controllers' => [
         'invokables' => [
-            'Mirador\Controller\Player' => Controller\PlayerController::class,
+            'Diva\Controller\Player' => Controller\PlayerController::class,
         ],
     ],
     'form_elements' => [
@@ -32,16 +32,16 @@ return [
     ],
     'router' => [
         'routes' => [
-            'mirador_player' => [
+            'diva_player' => [
                 'type' => \Zend\Router\Http\Segment::class,
                 'options' => [
-                    'route' => '/:resourcename/:id/mirador',
+                    'route' => '/:resourcename/:id/diva',
                     'constraints' => [
                         'resourcename' => 'item|item\-set',
                         'id' => '\d+',
                     ],
                     'defaults' => [
-                        '__NAMESPACE__' => 'Mirador\Controller',
+                        '__NAMESPACE__' => 'Diva\Controller',
                         'controller' => 'Player',
                         'action' => 'play',
                     ],
@@ -59,18 +59,18 @@ return [
             ],
         ],
     ],
-    'mirador' => [
+    'diva' => [
         'config' => [
-            'mirador_manifest_property' => '',
+            'diva_manifest_property' => '',
         ],
         'site_settings' => [
-            'mirador_append_item_set_show' => true,
-            'mirador_append_item_show' => true,
-            'mirador_append_item_set_browse' => false,
-            'mirador_append_item_browse' => false,
-            'mirador_class' => '',
-            'mirador_style' => 'display: block; width: 90%; height: 600px; margin: 1em 5%; position: relative;',
-            'mirador_locale' => 'en',
+            'diva_append_item_set_show' => true,
+            'diva_append_item_show' => true,
+            'diva_append_item_set_browse' => false,
+            'diva_append_item_browse' => false,
+            'diva_class' => '',
+            'diva_style' => 'display: block; width: 90%; height: 600px; margin: 1em 5%; position: relative;',
+            'diva_locale' => 'en',
         ],
     ],
 ];

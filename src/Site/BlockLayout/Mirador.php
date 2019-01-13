@@ -27,7 +27,7 @@
  * knowledge of the CeCILL license and that you accept its terms.
  */
 
-namespace Mirador\Site\BlockLayout;
+namespace Diva\Site\BlockLayout;
 
 use Omeka\Api\Representation\SiteRepresentation;
 use Omeka\Api\Representation\SitePageRepresentation;
@@ -35,11 +35,11 @@ use Omeka\Api\Representation\SitePageBlockRepresentation;
 use Omeka\Site\BlockLayout\AbstractBlockLayout;
 use Zend\View\Renderer\PhpRenderer;
 
-class Mirador extends AbstractBlockLayout
+class Diva extends AbstractBlockLayout
 {
     public function getLabel()
     {
-        return 'Mirador Viewer'; // @translate
+        return 'Diva Viewer'; // @translate
     }
 
     public function form(
@@ -58,7 +58,7 @@ class Mirador extends AbstractBlockLayout
             return 'No item selected'; // @translate
         }
 
-        return $view->partial('common/block-layout/mirador', [
+        return $view->partial('common/block-layout/diva', [
             'attachments' => $attachments,
         ]);
     }

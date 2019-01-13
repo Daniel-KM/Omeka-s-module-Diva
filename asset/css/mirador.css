@@ -1,10 +1,10 @@
-/* Mirador custom and fixes for common Omeka themes */
+/* Diva custom and fixes for common Omeka themes */
 @media screen {
-    body .mirador-container {
+    body .diva-container {
         font-size: initial;
         line-height: initial;
     }
-    .mirador-viewer .manifest-info .window-manifest-title {
+    .diva-viewer .manifest-info .window-manifest-title {
         line-height: initial;
     }
 }

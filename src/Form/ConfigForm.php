@@ -1,5 +1,5 @@
 <?php
-namespace Mirador\Form;
+namespace Diva\Form;
 
 use Omeka\Form\Element\PropertySelect;
 use Zend\Form\Form;
@@ -9,7 +9,7 @@ class ConfigForm extends Form
     public function init()
     {
         $this->add([
-            'name' => 'mirador_manifest_property',
+            'name' => 'diva_manifest_property',
             'type' => PropertySelect::class,
             'options' => [
                 'label' => 'Manifest property', // @translate
@@ -18,7 +18,7 @@ class ConfigForm extends Form
                 'term_as_value' => true,
             ],
             'attributes' => [
-                'id' => 'mirador_manifest_property',
+                'id' => 'diva_manifest_property',
                 'class' => 'chosen-select',
                 'data-placeholder' => 'Select a property…', // @translate
             ],
@@ -26,7 +26,7 @@ class ConfigForm extends Form
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add([
-            'name' => 'mirador_manifest_property',
+            'name' => 'diva_manifest_property',
             'required' => false,
         ]);
     }

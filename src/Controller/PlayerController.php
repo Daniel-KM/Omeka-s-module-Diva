@@ -1,6 +1,6 @@
 <?php
 
-namespace Mirador\Controller;
+namespace Diva\Controller;
 
 use Omeka\Mvc\Exception\NotFoundException;
 use Zend\Mvc\Controller\AbstractActionController;

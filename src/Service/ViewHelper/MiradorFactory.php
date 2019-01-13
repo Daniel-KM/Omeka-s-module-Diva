@@ -1,25 +1,25 @@
 <?php
 
-namespace Mirador\Service\ViewHelper;
+namespace Diva\Service\ViewHelper;
 
 use Interop\Container\ContainerInterface;
-use Mirador\View\Helper\Mirador;
+use Diva\View\Helper\Mirador;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
- * Service factory for the Mirador view helper.
+ * Service factory for the Diva view helper.
  */
-class MiradorFactory implements FactoryInterface
+class DivaFactory implements FactoryInterface
 {
     /**
-     * Create and return the Mirador view helper
+     * Create and return the Diva view helper
      *
-     * @return Mirador
+     * @return Diva
      */
     public function __invoke(ContainerInterface $serviceLocator, $requestedName, array $options = null)
     {
         $currentTheme = $serviceLocator->get('Omeka\Site\ThemeManager')
             ->getCurrentTheme();
-        return new Mirador($currentTheme);
+        return new Diva($currentTheme);
     }
 }
