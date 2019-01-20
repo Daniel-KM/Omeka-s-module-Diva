@@ -154,7 +154,7 @@ Module Diva for Omeka S:
 
 * Copyright Daniel Berthereau, 2018-2019
 
-First version of this module was built for the University of California.
+This project was supported in part by the University of California Office of the President MRPI funding MR-15-328710.
 
 
 [Diva Viewer]: https://github.com/Daniel-KM/Omeka-S-module-Diva
