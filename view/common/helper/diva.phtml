@@ -9,12 +9,11 @@
  */
 
 $divaId = json_encode( '#' . $config['id'], 320);
-$divaConfig = json_encode($config['config'], 320);
-
+$configJson = json_encode($config['config'], 320);
 $script = <<<JS
 $(document).ready(function() {
     $($divaId).diva(
-        $divaConfig
+        $configJson
     ).data('diva');
 });
 JS;
