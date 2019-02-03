@@ -40,15 +40,13 @@ If the module was installed from the source, rename the name of the folder of
 the module to `Diva`, and go to the root module, and run:
 
 ```
-    npm install
-    gulp install
+    composer install
 ```
 
 The next times:
 
 ```
-    npm update
-    gulp update
+    composer update
 ```
 
 * Configuration

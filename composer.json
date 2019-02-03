@@ -1,0 +1,35 @@
+{
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "asset/diva",
+        "version": "5.1.2",
+        "dist": {
+          "url": "https://github.com/DDMAL/diva.js/releases/download/v5.1.2/diva-v5.1.2.tar.gz",
+          "type": "tar"
+        }
+      }
+    }
+  ],
+
+  "require": {
+    "slowprog/composer-copy-file": "~0.3",
+    "asset/diva": "*"
+  },
+
+  "scripts": {
+    "post-install-cmd": [
+      "SlowProg\\CopyFile\\ScriptHandler::copy"
+    ],
+    "post-update-cmd": [
+      "SlowProg\\CopyFile\\ScriptHandler::copy"
+    ]
+  },
+
+  "extra": {
+    "copy-file": {
+      "vendor/asset/diva/build/": "asset/vendor/diva/"
+    }
+  }
+}
