@@ -179,13 +179,13 @@ class Diva extends AbstractHelper
                 ? $view->siteSetting('locale')
                 : $view->setting('locale'));
 
-        switch($resourceName) {
-            case 'items' :
+        switch ($resourceName) {
+            case 'items':
                 $config += [
                     'objectData' => $urlManifest,
                 ];
                 break;
-            case 'item_sets' :
+            case 'item_sets':
             case 'multiple':
                 $config += [
                     'objectData' => $urlManifest,
