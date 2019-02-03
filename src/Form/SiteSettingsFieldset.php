@@ -57,7 +57,6 @@ class SiteSettingsFieldset extends Fieldset
                 'disabled' => !$iiifServerIsActive,
             ],
         ]);
-        */
 
         $this->add([
             'name' => 'diva_append_item_browse',
@@ -71,41 +70,7 @@ class SiteSettingsFieldset extends Fieldset
                 'disabled' => !$iiifServerIsActive,
             ],
         ]);
-
-        $this->add([
-            'name' => 'diva_class',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'Class of main div', // @translate
-                'info' => 'Class to add to the main div.',  // @translate
-            ],
-            'attributes' => [
-                'id' => 'diva_class',
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'diva_style',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'Inline style', // @translate
-                'info' => 'If any, this style will be added to the main div of the Diva Viewer.', // @translate
-            ],
-            'attributes' => [
-                'id' => 'diva_style',
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'diva_locale',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'Locale of the viewer', // @translate
-            ],
-            'attributes' => [
-                'id' => 'diva_locale',
-            ],
-        ]);
+        */
     }
 
     /**

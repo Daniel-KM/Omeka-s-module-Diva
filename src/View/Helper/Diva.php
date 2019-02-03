@@ -9,19 +9,6 @@ use Zend\View\Helper\AbstractHelper;
 class Diva extends AbstractHelper
 {
     /**
-     * These options are used only when the player is called outside of a site
-     * or when the site settings are not set. They can be bypassed by options
-     * passed to the helper.
-     *
-     * @var array
-     */
-    protected $defaultOptions = [
-        'class' => '',
-        'style' => 'display: block; width: 90%; height: 600px; margin: 1em 5%; position: relative;',
-        'locale' => 'en',
-    ];
-
-    /**
      * @var Theme The current theme, if any
      */
     protected $currentTheme;
@@ -41,16 +28,17 @@ class Diva extends AbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param AbstractResourceEntityRepresentation|array $resource
-     * @param array $options Associative array of optional values:
-     *   - (string) class
-     *   - (string) locale
-     *   - (string) style
-     *   - (string) config
-     * @return string. The html string corresponding to the Diva.
+     * @param AbstractResourceEntityRepresentation|AbstractResourceEntityRepresentation[] $resource
+     * @param array $options
+     * @return string Html string corresponding to the viewer.
      */
     public function __invoke($resource, $options = [])
     {
+        // TODO Manage array of resources with Diva.
+        if (is_array($resource)) {
+            $resource = reset($resource);
+        }
+
         if (empty($resource)) {
             return '';
         }
@@ -75,7 +63,7 @@ class Diva extends AbstractHelper
                 ['force_canonical' => true]
             );
             $urlManifest = $view->iiifForceBaseUrlIfRequired($urlManifest);
-            return $this->render($urlManifest, $options);
+            return $this->render($urlManifest, $options, 'multiple');
         }
 
         // Prepare the url for the manifest of a record after additional checks.
@@ -92,7 +80,7 @@ class Diva extends AbstractHelper
             if ($urlManifest) {
                 // Manage the case where the url is saved as an uri or a text.
                 $urlManifest = $urlManifest->uri() ?: $urlManifest->value();
-                return $this->render($urlManifest, $options);
+                return $this->render($urlManifest, $options, $resourceName);
             }
         }
 
@@ -128,7 +116,7 @@ class Diva extends AbstractHelper
         );
         $urlManifest = $view->iiifForceBaseUrlIfRequired($urlManifest);
 
-        return $this->render($urlManifest, $resourceName, $options);
+        return $this->render($urlManifest, $options, $resourceName);
     }
 
     /**
@@ -165,62 +153,49 @@ class Diva extends AbstractHelper
      *
      * @param string $urlManifest
      * @param array $options
-     * @return string
+     * @param string $resourceName
+     * @return string Html code.
      */
-    protected function render($urlManifest, $resourceName, $options = [])
+    protected function render($urlManifest, array $options = [], $resourceName = null)
     {
+        static $id = 0;
+
         $view = $this->view;
-
-        // Check site, because site settings aren’t available outside of a site.
-        $isSite = $view->params()->fromRoute('__SITE__');
-        if (empty($isSite)) {
-            $options += $this->defaultOptions;
-        }
-
-        $class = isset($options['class'])
-            ? $options['class']
-            : $view->siteSetting('diva_class', $this->defaultOptions['class']);
-        if (!empty($class)) {
-            $class = ' ' . $class;
-        }
-
-        $style = isset($options['style'])
-            ? $options['style']
-            : $view->siteSetting('diva_style', $this->defaultOptions['style']);
-
-        $locale = isset($options['locale'])
-            ? $options['locale']
-            : $view->siteSetting('diva_locale', $this->defaultOptions['locale']);
 
         $view->headLink()
             ->appendStylesheet($view->assetUrl('vendor/diva/css/diva.min.css', 'Diva'))
             ->appendStylesheet($view->assetUrl('css/diva.css', 'Diva'));
         $view->headScript()
             ->appendFile($view->assetUrl('vendor/diva/js/diva.min.js', 'Diva'));
+
         $config = [
-            'id' => "diva",
-            'config' => [
-                'zoomLevel' => 0,
-            ],
-            'language' => $locale,
+            'id' => 'diva-' . ++$id,
+            'zoomLevel' => 0,
         ];
+
+        $config['locale'] = $view->identity()
+            ? $view->userSetting('locale')
+            : ($view->params()->fromRoute('__SITE__')
+                ? $view->siteSetting('locale')
+                : $view->setting('locale'));
 
         switch($resourceName) {
             case 'items' :
-                $config['config'] += [
+                $config += [
                     'objectData' => $urlManifest,
                 ];
                 break;
             case 'item_sets' :
-                $config['config'] += [
+            case 'multiple':
+                $config += [
                     'objectData' => $urlManifest,
                 ];
                 break;
         }
 
+        $config += $options;
+
         return $view->partial('common/helper/diva', [
-            'class' => $class,
-            'style' => $style,
             'config' => $config,
         ]);
     }

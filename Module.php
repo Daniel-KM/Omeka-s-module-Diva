@@ -79,13 +79,13 @@ class Module extends AbstractModule
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
+        /*
         $sharedEventManager->attach(
             'Omeka\Controller\Site\Item',
             'view.browse.after',
             [$this, 'handleViewBrowseAfterItem']
         );
 
-        /*
         $sharedEventManager->attach(
             'Omeka\Controller\Site\ItemSet',
             'view.browse.after',
