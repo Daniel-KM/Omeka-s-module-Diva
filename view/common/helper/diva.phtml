@@ -6,12 +6,25 @@
  * @link https://github.com/DDMAL/diva.js/wiki/Settings
  */
 
+$this->headScript()
+    ->appendFile($this->assetUrl('vendor/diva/plugins/download.js', 'Diva'))
+    ->appendFile($this->assetUrl('vendor/diva/plugins/manipulation.js', 'Diva'))
+    ->appendFile($this->assetUrl('vendor/diva/plugins/metadata.js', 'Diva'));
+
 $config['id'] =  isset($config['id']) ? $config['id'] : 'diva';
+/*
+// TODO Issue with json encode and plugins.
 $configJson = json_encode($config, 448);
+// let diva = new Diva('{$config['id']}', $configJson);
+*/
 $script = <<<JS
-$(document).ready(function() {
-    $('#{$config['id']}').diva($configJson).data('diva');
-});
+document.addEventListener('DOMContentLoaded', function () {
+    let diva = new Diva('{$config['id']}', {
+        'zoomLevel': {$config['zoomLevel']},
+        'objectData': "{$config['objectData']}",
+        'plugins': [Diva.DownloadPlugin, Diva.ManipulationPlugin, Diva.MetadataPlugin],
+    });
+}, false)
 JS;
 $this->headScript()->appendScript($script);
 

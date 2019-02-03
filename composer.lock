@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d39af47f6647b816fd7b0642bd483e1a",
+    "content-hash": "f1923f4e3b2955678c59f32c193c5875",
     "packages": [
         {
             "name": "asset/diva",
-            "version": "5.1.2",
+            "version": "6.0.0",
             "dist": {
-                "type": "tar",
-                "url": "https://github.com/DDMAL/diva.js/releases/download/v5.1.2/diva-v5.1.2.tar.gz",
+                "type": "zip",
+                "url": "https://github.com/DDMAL/diva.js/releases/download/v6.0.0/diva-v6.0.0.zip",
                 "reference": null,
                 "shasum": null
             },

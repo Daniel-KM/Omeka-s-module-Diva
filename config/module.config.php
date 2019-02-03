@@ -68,9 +68,6 @@ return [
             'diva_append_item_show' => true,
             // 'diva_append_item_set_browse' => false,
             // 'diva_append_item_browse' => false,
-            'diva_class' => '',
-            'diva_style' => '',
-            'diva_locale' => 'en',
         ],
     ],
 ];

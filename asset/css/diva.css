@@ -1,7 +1,6 @@
 /* Diva custom and fixes for common Omeka themes */
-/*
 @media screen {
-    .diva {
+    .diva .manipulation-tools {
+        min-width: 380px;
     }
 }
-*/

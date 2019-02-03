@@ -163,10 +163,10 @@ class Diva extends AbstractHelper
         $view = $this->view;
 
         $view->headLink()
-            ->appendStylesheet($view->assetUrl('vendor/diva/css/diva.min.css', 'Diva'))
+            ->appendStylesheet($view->assetUrl('vendor/diva/diva.css', 'Diva'))
             ->appendStylesheet($view->assetUrl('css/diva.css', 'Diva'));
         $view->headScript()
-            ->appendFile($view->assetUrl('vendor/diva/js/diva.min.js', 'Diva'));
+            ->appendFile($view->assetUrl('vendor/diva/diva.js', 'Diva'));
 
         $config = [
             'id' => 'diva-' . ++$id,

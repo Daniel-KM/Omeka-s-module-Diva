@@ -4,10 +4,10 @@
       "type": "package",
       "package": {
         "name": "asset/diva",
-        "version": "5.1.2",
+        "version": "6.0.0",
         "dist": {
-          "url": "https://github.com/DDMAL/diva.js/releases/download/v5.1.2/diva-v5.1.2.tar.gz",
-          "type": "tar"
+          "url": "https://github.com/DDMAL/diva.js/releases/download/v6.0.0/diva-v6.0.0.zip",
+          "type": "zip"
         }
       }
     }
@@ -29,7 +29,7 @@
 
   "extra": {
     "copy-file": {
-      "vendor/asset/diva/build/": "asset/vendor/diva/"
+      "vendor/asset/diva/": "asset/vendor/diva/"
     }
   }
 }

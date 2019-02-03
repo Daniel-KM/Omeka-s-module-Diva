@@ -15,11 +15,13 @@ the "International Image Interoperability Framework" standard is supported
 (level 2). If you don’t have an [IIPImage] server, Omeka S can be one! Just
 install the module [IIIF Server].
 
-It is an alternative to the [Universal Viewer] or the [Mirador Viewer].
+It’s a lighter and themable alternative to the [Universal Viewer] or the [Mirador Viewer].
 
 Note: unlike Universal Viewer and Mirador, Diva uses always the tiles. So if you
 use the module IIIF server as image server, all images should be tiled first,
 else the display of images may be slow.
+
+Furthermore, the current module doesn’t not support collections.
 
 
 Installation
@@ -61,9 +63,8 @@ The tiling means that big images like maps and deep paintings, and any other
 images, are converted into tiles in order to load and zoom them instantly.
 
 Only one option can be set in the main config (the manifest property, if any).
-The other can be set differently for each site, in the site settings:
+The other ones can be set differently for each site via the theme:
 
-- in site settings for the integration of the player;
 - via the theme of the site: copy file `view/common/helper/diva.phtml` in your
   theme and customize it;
 - via the theme of the site and the assets (`asset/vendor/diva).
@@ -86,17 +87,16 @@ To embed Diva somewhere else, just use the helper:
 
 ```php
     // Display the viewer with the specified item set.
-    // Diva doesn't support this feature.
+    // The module doesn’t support this feature currently.
     // echo $this->diva($itemSet);
 
     // Display the viewer with the specified item and specified options.
-    echo $this->diva($item, array(
-        'class' => 'my-class',
-        'style' => 'width: 40%; height: 400px;',
-    ));
+    // The options for Diva are directly passed to the partial, so they are
+    // available in the theme and set for the viewer.
+    echo $this->diva($item, $options);
 
     // Display multiple resources (items and/or item sets).
-    // Diva does not support this feature.
+    // The module doesn’t support this feature currently.
     // echo $this->diva($resources);
 ```
 
