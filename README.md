@@ -67,7 +67,7 @@ The other ones can be set differently for each site via the theme:
 
 - via the theme of the site: copy file `view/common/helper/diva.phtml` in your
   theme and customize it;
-- via the theme of the site and the assets (`asset/vendor/diva).
+- via the theme of the site and the assets (`asset/vendor/diva`).
 
 See below the notes for more info.
 

@@ -31,7 +31,7 @@ class Module extends AbstractModule
 
     public function install(ServiceLocatorInterface $serviceLocator)
     {
-        $js = __DIR__ . '/asset/vendor/diva/js/diva.min.js';
+        $js = __DIR__ . '/asset/vendor/diva/diva.js';
         if (!file_exists($js)) {
             $t = $serviceLocator->get('MvcTranslator');
             throw new ModuleCannotInstallException(
