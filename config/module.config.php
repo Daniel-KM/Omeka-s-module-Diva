@@ -26,9 +26,6 @@ return [
         'invokables' => [
             Form\ConfigForm::class => Form\ConfigForm::class,
         ],
-        'factories' => [
-            Form\SiteSettingsFieldset::class => Service\Form\SiteSettingsFieldsetFactory::class,
-        ],
     ],
     'router' => [
         'routes' => [
@@ -62,12 +59,6 @@ return [
     'diva' => [
         'config' => [
             'diva_manifest_property' => '',
-        ],
-        'site_settings' => [
-            // 'diva_append_item_set_show' => true,
-            'diva_append_item_show' => true,
-            // 'diva_append_item_set_browse' => false,
-            // 'diva_append_item_browse' => false,
         ],
     ],
 ];

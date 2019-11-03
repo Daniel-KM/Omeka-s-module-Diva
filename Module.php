@@ -50,17 +50,6 @@ class Module extends AbstractModule
             'view.show.after',
             [$this, 'handleViewShowAfterItem']
         );
-
-        $sharedEventManager->attach(
-            \Omeka\Form\SiteSettingsForm::class,
-            'form.add_elements',
-            [$this, 'handleSiteSettings']
-        );
-        $sharedEventManager->attach(
-            \Omeka\Form\SiteSettingsForm::class,
-            'form.add_input_filters',
-            [$this, 'handleSiteSettingsFilters']
-        );
     }
 
     public function getConfigForm(PhpRenderer $renderer)
@@ -70,7 +59,7 @@ class Module extends AbstractModule
         $settings = $services->get('Omeka\Settings');
         $form = $services->get('FormElementManager')->get(ConfigForm::class);
 
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
+        $defaultSettings = $config['diva']['config'];
         $data = $this->prepareDataToPopulate($settings, $defaultSettings);
 
         $view = $renderer;
@@ -90,40 +79,16 @@ class Module extends AbstractModule
         return $html;
     }
 
-    public function handleSiteSettingsFilters(Event $event)
-    {
-        $inputFilter = $event->getParam('inputFilter');
-        $inputFilter->get('diva')->add([
-            'name' => 'diva_append_item_set_browse',
-            'required' => false,
-        ]);
-        $inputFilter->get('diva')->add([
-            'name' => 'diva_append_item_browse',
-            'required' => false,
-        ]);
-    }
-
     public function handleViewBrowseAfterItem(Event $event)
     {
         $view = $event->getTarget();
         $services = $this->getServiceLocator();
-        $config = $services->get('Config');
-        $siteSettings = $services->get('Omeka\Settings\Site');
         // Note: there is no item-set show, but a special case for items browse.
-        $isItemSetShow = (bool) $services->get('Application')->getMvcEvent()->getRouteMatch()->getParam('item-set-id');
+        $isItemSetShow = (bool) $services->get('Application')
+            ->getMvcEvent()->getRouteMatch()->getParam('item-set-id');
         if ($isItemSetShow) {
-            if ($siteSettings->get(
-                'diva_append_item_set_show',
-                $config['diva']['site_settings']['diva_append_item_set_show']
-            )) {
-                echo $view->diva($view->itemSet);
-            }
-        } elseif ($this->iiifServerIsActive()
-            && $siteSettings->get(
-                'diva_append_item_browse',
-                $config['diva']['site_settings']['diva_append_item_browse']
-            )
-        ) {
+            echo $view->diva($view->itemSet);
+        } elseif ($this->iiifServerIsActive()) {
             echo $view->diva($view->items);
         }
     }
@@ -135,29 +100,13 @@ class Module extends AbstractModule
         }
 
         $view = $event->getTarget();
-        $services = $this->getServiceLocator();
-        $config = $services->get('Config');
-        $siteSettings = $services->get('Omeka\Settings\Site');
-        if ($siteSettings->get(
-            'diva_append_item_set_browse',
-            $config['diva']['site_settings']['diva_append_item_set_browse']
-        )) {
-            echo $view->diva($view->itemSets);
-        }
+        echo $view->diva($view->itemSets);
     }
 
     public function handleViewShowAfterItem(Event $event)
     {
         $view = $event->getTarget();
-        $services = $this->getServiceLocator();
-        $config = $services->get('Config');
-        $siteSettings = $services->get('Omeka\Settings\Site');
-        if ($siteSettings->get(
-            'diva_append_item_show',
-            $config['diva']['site_settings']['diva_append_item_show']
-        )) {
-            echo $view->diva($view->item);
-        }
+        echo $view->diva($view->item);
     }
 
     protected function preInstall()

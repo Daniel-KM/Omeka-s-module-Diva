@@ -29,3 +29,11 @@ WHERE id IN ('diva_append_item_set_show', 'diva_append_item_set_browse', 'diva_a
 SQL;
     $connection->exec($sql);
 }
+
+if (version_compare($oldVersion, '3.1.2', '<')) {
+    $sql = <<<'SQL'
+DELETE FROM site_setting
+WHERE id IN ("diva_append_item_set_show", "diva_append_item_show", "diva_append_item_set_browse", "diva_append_item_browse");
+SQL;
+    $connection->exec($sql);
+}
