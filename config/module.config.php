@@ -24,7 +24,7 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
-            Form\ConfigForm::class => Form\ConfigForm::class,
+            Form\SettingsFieldset::class => Form\SettingsFieldset::class,
         ],
     ],
     'router' => [
@@ -57,7 +57,7 @@ return [
         ],
     ],
     'diva' => [
-        'config' => [
+        'settings' => [
             'diva_manifest_property' => '',
         ],
     ],

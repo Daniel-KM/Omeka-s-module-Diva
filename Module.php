@@ -9,13 +9,11 @@ if (!class_exists(\Generic\AbstractModule::class)) {
 }
 
 use Generic\AbstractModule;
-use Diva\Form\ConfigForm;
 use Omeka\Module\Exception\ModuleCannotInstallException;
 use Omeka\Module\Manager as ModuleManager;
 use Zend\EventManager\Event;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\View\Renderer\PhpRenderer;
 
 class Module extends AbstractModule
 {
@@ -27,6 +25,18 @@ class Module extends AbstractModule
 
         $acl = $this->getServiceLocator()->get('Omeka\Acl');
         $acl->allow(null, ['Diva\Controller\Player']);
+    }
+
+    protected function preInstall()
+    {
+        $js = __DIR__ . '/asset/vendor/diva/diva.js';
+        if (!file_exists($js)) {
+            $t = $this->getServiceLocator()->get('MvcTranslator');
+            throw new ModuleCannotInstallException(
+                $t->translate('The Diva library should be installed.') // @translate
+                   . ' ' . $t->translate('See module’s installation documentation.') // @translate
+            );
+        }
     }
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
@@ -50,33 +60,44 @@ class Module extends AbstractModule
             'view.show.after',
             [$this, 'handleViewShowAfterItem']
         );
+
+        $sharedEventManager->attach(
+            \Omeka\Form\SettingForm::class,
+            'form.add_elements',
+            [$this, 'handleMainSettings']
+        );
+        $sharedEventManager->attach(
+            \Omeka\Form\SettingForm::class,
+            'form.add_input_filters',
+            [$this, 'handleMainSettingsFilters']
+        );
     }
 
-    public function getConfigForm(PhpRenderer $renderer)
+    public function handleMainSettings(Event $event)
     {
-        $services = $this->getServiceLocator();
-        $config = $services->get('Config');
-        $settings = $services->get('Omeka\Settings');
-        $form = $services->get('FormElementManager')->get(ConfigForm::class);
+        parent::handleMainSettings($event);
 
-        $defaultSettings = $config['diva']['config'];
-        $data = $this->prepareDataToPopulate($settings, $defaultSettings);
+        $form = $event->getTarget();
 
-        $view = $renderer;
-        $html = '<p>';
-        $html .= $this->iiifServerIsActive()
-            ? $view->translate('The IIIF Server is active, so when no url is set, the viewer will use the standard routes.') // @translate
-            : ($view->translate('The IIIF Server is not active, so when no url is set, the viewer won’t be displayed.') // @translate
-                . ' ' . $view->translate('Furthermore, the Diva Viewer can’t display lists of items.')); // @translate
-        $html .= '</p>';
-        $html .= '<p>'
-            . $view->translate('The viewer itself can be basically configured in settings of each site, or in the theme.') // @translate
-            . '</p>';
+        $translator = $this->getServiceLocator()->get('MvcTranslator');
+        $message = $this->iiifServerIsActive()
+            ? $translator->translate('The IIIF Server is active, so when no url is set, the viewer will use the standard routes.') // @translate;
+            : $translator->translate('The IIIF Server is not active, so when no url is set, the viewer won’t be displayed. Furthermore, the viewer won’t display lists of items.'); // @translate
 
-        $form->init();
-        $form->setData($data);
-        $html .= $renderer->formCollection($form);
-        return $html;
+        /** @var \Omeka\Form\Element\PropertySelect $element */
+        $element = $form->get('diva')->get('diva_manifest_property');
+        $element->setOption('info', $translator->translate($element->getOption('info')) . ' ' . $message);
+    }
+
+    public function handleMainSettingsFilters(Event $event)
+    {
+        $event->getParam('inputFilter')
+            ->get('diva')
+            ->add([
+                'name' => 'diva_manifest_property',
+                'required' => false,
+            ])
+        ;
     }
 
     public function handleViewBrowseAfterItem(Event $event)
@@ -107,18 +128,6 @@ class Module extends AbstractModule
     {
         $view = $event->getTarget();
         echo $view->diva($view->item);
-    }
-
-    protected function preInstall()
-    {
-        $js = __DIR__ . '/asset/vendor/diva/diva.js';
-        if (!file_exists($js)) {
-            $t = $this->getServiceLocator()->get('MvcTranslator');
-            throw new ModuleCannotInstallException(
-                $t->translate('The Diva library should be installed.') // @translate
-                    . ' ' . $t->translate('See module’s installation documentation.') // @translate
-            );
-        }
     }
 
     protected function iiifServerIsActive()
