@@ -17,34 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Module.php:81
+#: Module.php:37
+msgid "The Diva library should be installed."
+msgstr ""
+
+#: Module.php:38
+msgid "See module’s installation documentation."
+msgstr ""
+
+#: Module.php:85
 msgid ""
 "The IIIF Server is active, so when no url is set, the viewer will use the "
 "standard routes."
 msgstr ""
 
-#: Module.php:82
-msgid ""
-"The IIIF Server is not active, so when no url is set, the viewer won’t be "
-"displayed."
-msgstr ""
-
-#: Module.php:83
-msgid "Furthermore, the Diva Viewer can’t display lists of items."
-msgstr ""
-
 #: Module.php:86
 msgid ""
-"The viewer itself can be basically configured in settings of each site, or "
-"in the theme."
-msgstr ""
-
-#: Module.php:171
-msgid "The Diva library should be installed."
-msgstr ""
-
-#: Module.php:172
-msgid "See module’s installation documentation."
+"The IIIF Server is not active, so when no url is set, the viewer won’t be "
+"displayed. Furthermore, the viewer won’t display lists of items."
 msgstr ""
 
 #: src/Generic/AbstractModule.php:518
@@ -64,34 +54,24 @@ msgid ""
 "unavailable."
 msgstr ""
 
-#: src/Form/ConfigForm.php:15
+#: src/Form/SettingsFieldset.php:9
+msgid "Diva IIIF viewer"
+msgstr ""
+
+#: src/Form/SettingsFieldset.php:18
 msgid "Manifest property"
 msgstr ""
 
-#: src/Form/ConfigForm.php:16
+#: src/Form/SettingsFieldset.php:19
 msgid ""
 "The property supplying the manifest URL for the viewer, for example "
 "\"dcterms:hasFormat\"."
 msgstr ""
 
-#: src/Form/ConfigForm.php:23
+#: src/Form/SettingsFieldset.php:26
 msgid "Select a property…"
 msgstr ""
 
-#: src/Form/SiteSettingsFieldset.php:19 src/Site/BlockLayout/Diva.php:42
+#: src/Site/BlockLayout/Diva.php:47
 msgid "Diva Viewer"
-msgstr ""
-
-#: src/Form/SiteSettingsFieldset.php:39
-msgid "Append automatically to item page"
-msgstr ""
-
-#: src/Form/SiteSettingsFieldset.php:40
-msgid ""
-"If unchecked, the viewer can be added via the helper in the theme or the "
-"block in any page."
-msgstr ""
-
-#: src/Form/SiteSettingsFieldset.php:43
-msgid "diva_append_item_show"
 msgstr ""
