@@ -6,10 +6,12 @@
  * @link https://github.com/DDMAL/diva.js/wiki/Settings
  */
 
+$assetUrl = $this->plugin('assetUrl');
+
 $this->headScript()
-    ->appendFile($this->assetUrl('vendor/diva/plugins/download.js', 'Diva'))
-    ->appendFile($this->assetUrl('vendor/diva/plugins/manipulation.js', 'Diva'))
-    ->appendFile($this->assetUrl('vendor/diva/plugins/metadata.js', 'Diva'));
+    ->appendFile($assetUrl('vendor/diva/plugins/download.js', 'Diva'))
+    ->appendFile($assetUrl('vendor/diva/plugins/manipulation.js', 'Diva'))
+    ->appendFile($assetUrl('vendor/diva/plugins/metadata.js', 'Diva'));
 
 $config['id'] =  isset($config['id']) ? $config['id'] : 'diva';
 /*

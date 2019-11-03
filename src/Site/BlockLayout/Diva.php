@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright 2015-2017 Daniel Berthereau
+ * Copyright 2015-2019 Daniel Berthereau
  *
  * This software is governed by the CeCILL license under French law and abiding
  * by the rules of distribution of free software. You can use, modify and/or
@@ -37,6 +37,11 @@ use Zend\View\Renderer\PhpRenderer;
 
 class Diva extends AbstractBlockLayout
 {
+    /**
+     * The default partial view script.
+     */
+    const PARTIAL_NAME = 'common/block-layout/diva';
+
     public function getLabel()
     {
         return 'Diva Viewer'; // @translate
@@ -58,7 +63,7 @@ class Diva extends AbstractBlockLayout
             return 'No resource selected'; // @translate
         }
 
-        return $view->partial('common/block-layout/diva', [
+        return $view->partial(self::PARTIAL_NAME, [
             'attachments' => $attachments,
         ]);
     }
