@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-11 00:00+0100\n"
+"POT-Creation-Date: 2019-11-04 00:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Module.php:38
-msgid "The Diva library should be installed."
-msgstr ""
-
-#: Module.php:39
-msgid "See module’s installation documentation."
-msgstr ""
-
-#: Module.php:132
+#: Module.php:81
 msgid ""
 "The IIIF Server is active, so when no url is set, the viewer will use the "
 "standard routes."
 msgstr ""
 
-#: Module.php:133
+#: Module.php:82
 msgid ""
 "The IIIF Server is not active, so when no url is set, the viewer won’t be "
 "displayed."
 msgstr ""
 
-#: Module.php:134
+#: Module.php:83
 msgid "Furthermore, the Diva Viewer can’t display lists of items."
 msgstr ""
 
-#: Module.php:137
+#: Module.php:86
 msgid ""
 "The viewer itself can be basically configured in settings of each site, or "
 "in the theme."
+msgstr ""
+
+#: Module.php:171
+msgid "The Diva library should be installed."
+msgstr ""
+
+#: Module.php:172
+msgid "See module’s installation documentation."
+msgstr ""
+
+#: src/Generic/AbstractModule.php:518
+#, php-format
+msgid "This module requires the module \"%s\"."
+msgstr ""
+
+#: src/Generic/AbstractModule.php:538
+#, php-format
+msgid "This module requires modules \"%s\"."
+msgstr ""
+
+#: src/Generic/AbstractModule.php:606
+#, php-format
+msgid ""
+"The module \"%s\" was automatically deactivated because the dependencies are "
+"unavailable."
 msgstr ""
 
 #: src/Form/ConfigForm.php:15
