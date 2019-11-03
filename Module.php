@@ -2,24 +2,24 @@
 
 namespace Diva;
 
-use Omeka\Module\AbstractModule;
+if (!class_exists(\Generic\AbstractModule::class)) {
+    require file_exists(dirname(__DIR__) . '/Generic/AbstractModule.php')
+        ? dirname(__DIR__) . '/Generic/AbstractModule.php'
+        : __DIR__ . '/src/Generic/AbstractModule.php';
+}
+
+use Generic\AbstractModule;
+use Diva\Form\ConfigForm;
 use Omeka\Module\Exception\ModuleCannotInstallException;
 use Omeka\Module\Manager as ModuleManager;
-use Diva\Form\ConfigForm;
-use Diva\Form\SiteSettingsFieldset;
 use Zend\EventManager\Event;
 use Zend\EventManager\SharedEventManagerInterface;
-use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Renderer\PhpRenderer;
 
 class Module extends AbstractModule
 {
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
-    }
+    const NAMESPACE = __NAMESPACE__;
 
     public function onBootstrap(MvcEvent $event)
     {
@@ -27,59 +27,6 @@ class Module extends AbstractModule
 
         $acl = $this->getServiceLocator()->get('Omeka\Acl');
         $acl->allow(null, ['Diva\Controller\Player']);
-    }
-
-    public function install(ServiceLocatorInterface $serviceLocator)
-    {
-        $js = __DIR__ . '/asset/vendor/diva/diva.js';
-        if (!file_exists($js)) {
-            $t = $serviceLocator->get('MvcTranslator');
-            throw new ModuleCannotInstallException(
-                $t->translate('The Diva library should be installed.') // @translate
-                    . ' ' . $t->translate('See module’s installation documentation.') // @translate
-            );
-        }
-
-        $this->manageSettings($serviceLocator->get('Omeka\Settings'), 'install');
-        $this->manageSiteSettings($serviceLocator, 'install');
-    }
-
-    public function uninstall(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->manageSettings($serviceLocator->get('Omeka\Settings'), 'uninstall');
-        $this->manageSiteSettings($serviceLocator, 'uninstall');
-    }
-
-    protected function manageSettings($settings, $process, $key = 'config')
-    {
-        $config = require __DIR__ . '/config/module.config.php';
-        $defaultSettings = $config[strtolower(__NAMESPACE__)][$key];
-        foreach ($defaultSettings as $name => $value) {
-            switch ($process) {
-                case 'install':
-                    $settings->set($name, $value);
-                    break;
-                case 'uninstall':
-                    $settings->delete($name);
-                    break;
-            }
-        }
-    }
-
-    protected function manageSiteSettings(ServiceLocatorInterface $serviceLocator, $process)
-    {
-        $siteSettings = $serviceLocator->get('Omeka\Settings\Site');
-        $api = $serviceLocator->get('Omeka\ApiManager');
-        $sites = $api->search('sites')->getContent();
-        foreach ($sites as $site) {
-            $siteSettings->setTargetId($site->id());
-            $this->manageSettings($siteSettings, $process, 'site_settings');
-        }
-    }
-
-    public function upgrade($oldVersion, $newVersion, ServiceLocatorInterface $serviceLocator)
-    {
-        require_once 'data/scripts/upgrade.php';
     }
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
@@ -143,48 +90,6 @@ class Module extends AbstractModule
         return $html;
     }
 
-    public function handleConfigForm(AbstractController $controller)
-    {
-        $services = $this->getServiceLocator();
-        $config = $services->get('Config');
-        $settings = $services->get('Omeka\Settings');
-        $form = $services->get('FormElementManager')->get(ConfigForm::class);
-
-        $params = $controller->getRequest()->getPost();
-
-        $form->init();
-        $form->setData($params);
-        if (!$form->isValid()) {
-            $controller->messenger()->addErrors($form->getMessages());
-            return false;
-        }
-
-        $params = $form->getData();
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
-        $params = array_intersect_key($params, $defaultSettings);
-        foreach ($params as $name => $value) {
-            $settings->set($name, $value);
-        }
-    }
-
-    public function handleSiteSettings(Event $event)
-    {
-        $services = $this->getServiceLocator();
-        $config = $services->get('Config');
-        $settings = $services->get('Omeka\Settings\Site');
-        $space = strtolower(__NAMESPACE__);
-        $form = $event->getTarget();
-        $fieldset = $services->get('FormElementManager')->get(SiteSettingsFieldset::class);
-
-        // The module iiif server is required to display collections of items.
-
-        $data = $this->prepareDataToPopulate($settings, $config[$space]['site_settings']);
-
-        $fieldset->setName($space);
-        $form->add($fieldset);
-        $form->get($space)->populateValues($data);
-    }
-
     public function handleSiteSettingsFilters(Event $event)
     {
         $inputFilter = $event->getParam('inputFilter');
@@ -196,25 +101,6 @@ class Module extends AbstractModule
             'name' => 'diva_append_item_browse',
             'required' => false,
         ]);
-    }
-
-    /**
-     * @todo Use form methods to populate.
-     * @param \Omeka\Settings\SettingsInterface $settings
-     * @param array$defaultSettings
-     * @return array
-     */
-    protected function prepareDataToPopulate(\Omeka\Settings\SettingsInterface $settings, array $defaultSettings)
-    {
-        $data = [];
-        foreach ($defaultSettings as $name => $value) {
-            $val = $settings->get($name, $value);
-            if (is_array($value)) {
-                $val = is_array($val) ? implode(PHP_EOL, $val) : $val;
-            }
-            $data[$name] = $val;
-        }
-        return $data;
     }
 
     public function handleViewBrowseAfterItem(Event $event)
@@ -271,6 +157,18 @@ class Module extends AbstractModule
             $config['diva']['site_settings']['diva_append_item_show']
         )) {
             echo $view->diva($view->item);
+        }
+    }
+
+    protected function preInstall()
+    {
+        $js = __DIR__ . '/asset/vendor/diva/diva.js';
+        if (!file_exists($js)) {
+            $t = $this->getServiceLocator()->get('MvcTranslator');
+            throw new ModuleCannotInstallException(
+                $t->translate('The Diva library should be installed.') // @translate
+                    . ' ' . $t->translate('See module’s installation documentation.') // @translate
+            );
         }
     }
 

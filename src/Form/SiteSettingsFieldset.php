@@ -14,7 +14,7 @@ class SiteSettingsFieldset extends Fieldset
     public function init()
     {
         // The module iiif server is required to display collections of items.
-        $iiifServerIsActive = $this->getIiifServerIsActive();
+        // $iiifServerIsActive = $this->getIiifServerIsActive();
 
         $this->setLabel('Diva Viewer'); // @translate
 
