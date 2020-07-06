@@ -47,22 +47,14 @@ class Diva extends AbstractHelper
 
         // If the manifest is not provided in metadata, point to the manifest
         // created from Omeka files only when the Iiif Server is installed.
-        $iiifServerIsActive = $view->getHelperPluginManager()->has('iiifManifest');
-        $version = $view->setting('iiifserver_manifest_version', '2');
+        $iiifServerIsActive = $view->getHelperPluginManager()->has('iiifUrl');
 
         // Prepare the url of the manifest for a dynamic collection.
         if (is_array($resource)) {
             if (!$iiifServerIsActive) {
                 return '';
             }
-
-            $identifiers = $this->buildIdentifierForList($resource);
-            $urlManifest = $view->url(
-                'iiifserver/set',
-                ['version' => $version, 'id' => implode(',', $identifiers)],
-                ['force_canonical' => true]
-            );
-            $urlManifest = $view->iiifForceBaseUrlIfRequired($urlManifest);
+            $urlManifest = $view->iiifUrl($resource);
             return $this->render($urlManifest, $options, 'multiple');
         }
 
@@ -94,55 +86,33 @@ class Diva extends AbstractHelper
         switch ($resourceName) {
             case 'items':
                 // Currently, an item without files is unprocessable.
-                if (count($resource->media()) == 0) {
+                $medias = $resource->media();
+                if (!count($medias)) {
                     // return $view->translate('This item has no files and is not displayable.');
                     return '';
                 }
-                $route = 'iiifserver/manifest';
+                // Display the viewer only when at least one media is an image.
+                $hasImage = false;
+                foreach ($medias as $media) {
+                    if ($media->ingester() === 'iiif' || strtok($media->mediaType(), '/') === 'image') {
+                        $hasImage = true;
+                        break;
+                    }
+                }
+                if (!$hasImage) {
+                    return '';
+                }
                 break;
             case 'item_sets':
                 if ($resource->itemCount() == 0) {
                     // return $view->translate('This collection has no item and is not displayable.');
                     return '';
                 }
-                $route = 'iiifserver/collection';
                 break;
         }
 
-        $plugins = $this->view->getHelperPluginManager();
-        if ($plugins->has('iiifCleanIdentifiers')) {
-            $helper = $plugins->get('iiifCleanIdentifiers');
-            $identifier = $helper($resource->id());
-        } else {
-            $identifier = $resource->id();
-        }
-
-        $urlManifest = $view->url(
-            $route,
-            ['version' => $version, 'id' => $identifier],
-            ['force_canonical' => true]
-        );
-        $urlManifest = $view->iiifForceBaseUrlIfRequired($urlManifest);
-
+        $urlManifest = $view->iiifUrl($resource);
         return $this->render($urlManifest, $options, $resourceName);
-    }
-
-    /**
-     * Helper to list all resource ids.
-     *
-     * @param array $resources
-     * @return string
-     */
-    protected function buildIdentifierForList(array $resources)
-    {
-        $plugins = $this->view->getHelperPluginManager();
-        if ($plugins->has('iiifCleanIdentifiers')) {
-            $helper = $plugins->get('iiifCleanIdentifiers');
-            return $helper($resources);
-        }
-        return array_map(function($v) {
-            return $v->id();
-        }, $resources);
     }
 
     /**
