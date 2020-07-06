@@ -4,9 +4,9 @@
       "type": "package",
       "package": {
         "name": "asset/diva",
-        "version": "6.0.0",
+        "version": "6.0.1",
         "dist": {
-          "url": "https://github.com/DDMAL/diva.js/releases/download/v6.0.0/diva-v6.0.0.zip",
+          "url": "https://github.com/DDMAL/diva.js/releases/download/v6.0.1/diva-v6.0.1.zip",
           "type": "zip"
         }
       }
