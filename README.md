@@ -116,7 +116,7 @@ your archives regularly so you can roll back if needed.
 Troubleshooting
 ---------------
 
-See online issues on the [module issues] page on GitHub.
+See online issues on the [module issues] page on GitLab.
 
 
 License
@@ -158,22 +158,22 @@ Module Diva for Omeka S:
 This project was supported in part by the University of California Office of the President MRPI funding MR-15-328710.
 
 
-[Diva Viewer]: https://github.com/Daniel-KM/Omeka-S-module-Diva
+[Diva Viewer]: https://gitlab.com/Daniel-KM/Omeka-S-module-Diva
 [Diva]: https://ddmal.github.io/diva.js
 [Omeka S]: https://omeka.org/s
 [Omeka]: https://omeka.org
-[IIIF Server]: https://github.com/Daniel-KM/Omeka-S-module-IiifServer
+[IIIF Server]: https://gitlab.com/Daniel-KM/Omeka-S-module-IiifServer
 [IIIF]: http://iiif.io
 [IIPImage]: http://iipimage.sourceforge.net
-[Universal Viewer]: https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer
-[Mirador Viewer]: https://github.com/Daniel-KM/Omeka-S-module-Mirador
-[`Diva.zip`]: https://github.com/Daniel-KM/Omeka-S-module-Diva/releases
+[Universal Viewer]: https://gitlab.com/Daniel-KM/Omeka-S-module-UniversalViewer
+[Mirador Viewer]: https://gitlab.com/Daniel-KM/Omeka-S-module-Mirador
+[`Diva.zip`]: https://gitlab.com/Daniel-KM/Omeka-S-module-Diva/-/releases
 [iiif specifications]: http://iiif.io/api/
-[module issues]: https://github.com/Daniel-KM/Omeka-S-module-Diva/issues
+[module issues]: https://gitlab.com/Daniel-KM/Omeka-S-module-Diva/-/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 [FSF]: https://www.fsf.org
 [OSI]: http://opensource.org
 [ISC]: https://www.isc.org/downloads/software-support-policy/isc-license/
 [GitLab]: https://gitlab.com/Daniel-KM
-[Daniel-KM]: https://github.com/Daniel-KM "Daniel Berthereau"
+[Daniel-KM]: https://gitlab.com/Daniel-KM "Daniel Berthereau"
