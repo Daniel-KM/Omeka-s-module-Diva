@@ -37,3 +37,7 @@ WHERE id IN ("diva_append_item_set_show", "diva_append_item_show", "diva_append_
 SQL;
     $connection->exec($sql);
 }
+
+if (version_compare($oldVersion, '3.3.2', '<')) {
+    $settings->delete('diva_manifest_property');
+}

@@ -22,11 +22,6 @@ return [
             'Diva\Controller\Player' => Controller\PlayerController::class,
         ],
     ],
-    'form_elements' => [
-        'invokables' => [
-            Form\SettingsFieldset::class => Form\SettingsFieldset::class,
-        ],
-    ],
     'router' => [
         'routes' => [
             'diva_player' => [
@@ -57,8 +52,5 @@ return [
         ],
     ],
     'diva' => [
-        'settings' => [
-            'diva_manifest_property' => '',
-        ],
     ],
 ];
