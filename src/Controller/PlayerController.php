@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Diva\Controller;
 
-use Omeka\Mvc\Exception\NotFoundException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Omeka\Mvc\Exception\NotFoundException;
 
 class PlayerController extends AbstractActionController
 {
@@ -13,7 +13,7 @@ class PlayerController extends AbstractActionController
      *
      * @see self::playAction()
      */
-    public function indexAction()
+    public function indexAction(): void
     {
         $params = $this->params()->fromRoute();
         $params['action'] = 'play';

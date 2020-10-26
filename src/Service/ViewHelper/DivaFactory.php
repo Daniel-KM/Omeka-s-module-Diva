@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Diva\Service\ViewHelper;
 
-use Interop\Container\ContainerInterface;
 use Diva\View\Helper\Diva;
+use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Diva;
 
@@ -9,17 +9,17 @@ if (!class_exists(\Generic\AbstractModule::class)) {
 }
 
 use Generic\AbstractModule;
-use Omeka\Module\Exception\ModuleCannotInstallException;
-use Omeka\Module\Manager as ModuleManager;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\Mvc\MvcEvent;
+use Omeka\Module\Exception\ModuleCannotInstallException;
+use Omeka\Module\Manager as ModuleManager;
 
 class Module extends AbstractModule
 {
     const NAMESPACE = __NAMESPACE__;
 
-    public function onBootstrap(MvcEvent $event)
+    public function onBootstrap(MvcEvent $event): void
     {
         parent::onBootstrap($event);
 
@@ -27,7 +27,7 @@ class Module extends AbstractModule
         $acl->allow(null, ['Diva\Controller\Player']);
     }
 
-    protected function preInstall()
+    protected function preInstall(): void
     {
         $js = __DIR__ . '/asset/vendor/diva/diva.js';
         if (!file_exists($js)) {
@@ -39,7 +39,7 @@ class Module extends AbstractModule
         }
     }
 
-    public function attachListeners(SharedEventManagerInterface $sharedEventManager)
+    public function attachListeners(SharedEventManagerInterface $sharedEventManager): void
     {
         /*
         $sharedEventManager->attach(
@@ -73,7 +73,7 @@ class Module extends AbstractModule
         );
     }
 
-    public function handleMainSettings(Event $event)
+    public function handleMainSettings(Event $event): void
     {
         parent::handleMainSettings($event);
 
@@ -89,7 +89,7 @@ class Module extends AbstractModule
         $element->setOption('info', $translator->translate($element->getOption('info')) . ' ' . $message);
     }
 
-    public function handleMainSettingsFilters(Event $event)
+    public function handleMainSettingsFilters(Event $event): void
     {
         $event->getParam('inputFilter')
             ->get('diva')
@@ -100,7 +100,7 @@ class Module extends AbstractModule
         ;
     }
 
-    public function handleViewBrowseAfterItem(Event $event)
+    public function handleViewBrowseAfterItem(Event $event): void
     {
         $view = $event->getTarget();
         $services = $this->getServiceLocator();
@@ -114,7 +114,7 @@ class Module extends AbstractModule
         }
     }
 
-    public function handleViewBrowseAfterItemSet(Event $event)
+    public function handleViewBrowseAfterItemSet(Event $event): void
     {
         if (!$this->iiifServerIsActive()) {
             return;
@@ -124,7 +124,7 @@ class Module extends AbstractModule
         echo $view->diva($view->itemSets);
     }
 
-    public function handleViewShowAfterItem(Event $event)
+    public function handleViewShowAfterItem(Event $event): void
     {
         $view = $event->getTarget();
         echo $view->diva($view->item);
