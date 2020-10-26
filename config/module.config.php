@@ -30,7 +30,7 @@ return [
     'router' => [
         'routes' => [
             'diva_player' => [
-                'type' => \Zend\Router\Http\Segment::class,
+                'type' => \Laminas\Router\Http\Segment::class,
                 'options' => [
                     'route' => '/:resourcename/:id/diva',
                     'constraints' => [

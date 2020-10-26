@@ -4,7 +4,7 @@ namespace Diva\Service\ViewHelper;
 
 use Interop\Container\ContainerInterface;
 use Diva\View\Helper\Diva;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Service factory for the Diva view helper.
