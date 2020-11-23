@@ -35,9 +35,8 @@ install it, or use and init the source.
 
 * From the zip
 
-Download the last release [`Diva.zip`] from the list of releases (the
-master does not contain the dependency), and uncompress it in the `modules`
-directory.
+Download the last release [Diva.zip] from the list of releases (the master does
+not contain the dependency), and uncompress it in the `modules` directory.
 
 * From the source and for development:
 
@@ -147,7 +146,7 @@ Widget [Diva]:
 
 Module Diva for Omeka S:
 
-* Copyright Daniel Berthereau, 2018-2019
+* Copyright Daniel Berthereau, 2018-2020
 
 This project was supported in part by the University of California Office of the President MRPI funding MR-15-328710.
 
