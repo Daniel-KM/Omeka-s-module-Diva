@@ -116,10 +116,11 @@ class Diva extends AbstractHelper
      *
      * @param string $urlManifest
      * @param array $options
-     * @param string $resourceName
+     * @param string $resourceName May be"multiple".
+     * @param bool $isExternal If the manifest is managed by Omeka or not.
      * @return string Html code.
      */
-    protected function render($urlManifest, array $options = [], $resourceName = null)
+    protected function render($urlManifest, array $options = [], $resourceName = null, $isExternal = false)
     {
         static $id = 0;
 
