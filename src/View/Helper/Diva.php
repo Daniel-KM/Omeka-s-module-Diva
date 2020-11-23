@@ -90,7 +90,7 @@ class Diva extends AbstractHelper
                 // Display the viewer only when at least one media is an image.
                 $hasImage = false;
                 foreach ($medias as $media) {
-                    if ($media->ingester() === 'iiif' || strtok($media->mediaType(), '/') === 'image') {
+                    if ($media->ingester() === 'iiif' || strtok((string) $media->mediaType(), '/') === 'image') {
                         $hasImage = true;
                         break;
                     }
@@ -183,8 +183,7 @@ class Diva extends AbstractHelper
 
         // As fallback, get the path in the module (the file must exist).
         if ($module) {
-            $assetPath = $this->view->assetUrl($path, $module, false, false);
-            return $assetPath;
+            return $this->view->assetUrl($path, $module, false, false);
         }
     }
 }

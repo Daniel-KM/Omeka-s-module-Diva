@@ -13,7 +13,7 @@ $this->headScript()
     ->appendFile($assetUrl('vendor/diva/plugins/manipulation.js', 'Diva'), 'text/javascript', ['defer' => 'defer'])
     ->appendFile($assetUrl('vendor/diva/plugins/metadata.js', 'Diva'), 'text/javascript', ['defer' => 'defer']);
 
-$config['id'] =  isset($config['id']) ? $config['id'] : 'diva';
+$config['id'] = $config['id'] ?? 'diva';
 /*
 // TODO Issue with json encode and plugins.
 $configJson = json_encode($config, 448);
