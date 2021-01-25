@@ -21,19 +21,69 @@ return [
         'invokables' => [
             'Diva\Controller\Player' => Controller\PlayerController::class,
         ],
+        // The aliases simplify the routing, the url assembly and allows to support module Clean url.
+        'aliases' => [
+            'Diva\Controller\Item' => Controller\PlayerController::class,
+            'Diva\Controller\CleanUrlController' => Controller\PlayerController::class,
+        ],
     ],
     'router' => [
         'routes' => [
+            'site' => [
+                'child_routes' => [
+                    // This route allows to have a url compatible with Clean url.
+                    'resource-id' => [
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'diva' => [
+                                'type' => \Laminas\Router\Http\Literal::class,
+                                'options' => [
+                                    'route' => '/diva',
+                                    'constraints' => [
+                                        'controller' => 'item',
+                                        'action' => 'play',
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Diva\Controller',
+                                        'controller' => 'Player',
+                                        'action' => 'play',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    // This route is the default url.
+                    'resource-id-diva' => [
+                        'type' => \Laminas\Router\Http\Segment::class,
+                        'options' => [
+                            'route' => '/:controller/:id/diva',
+                            'constraints' => [
+                                'controller' => 'item',
+                                'action' => 'play',
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Diva\Controller',
+                                'controller' => 'Player',
+                                'action' => 'play',
+                                'id' => '\d+',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            // This route allows to have a top url without Clean url.
+            // TODO Remove this route?
             'diva_player' => [
                 'type' => \Laminas\Router\Http\Segment::class,
                 'options' => [
-                    'route' => '/:resourcename/:id/diva',
+                    'route' => '/:controller/:id/diva',
                     'constraints' => [
-                        'resourcename' => 'item|item\-set',
+                        'controller' => 'item',
                         'id' => '\d+',
                     ],
                     'defaults' => [
                         '__NAMESPACE__' => 'Diva\Controller',
+                        // '__SITE__' => true,
                         'controller' => 'Player',
                         'action' => 'play',
                     ],
