@@ -2,7 +2,8 @@ Diva Viewer (module for Omeka S)
 ================================
 
 > __New versions of this module and support for Omeka S version 3.0 and above
-> are available on [GitLab], which seems to respect users and privacy better.__
+> are available on [GitLab], which seems to respect users and privacy better
+> than the previous repository.__
 
 [Diva Viewer] is a module for [Omeka S] that integrates [Diva], a Document Image
 Viewer with AJAX, that is an advanced online viewer for images, so it can
@@ -146,7 +147,7 @@ Widget [Diva]:
 
 Module Diva for Omeka S:
 
-* Copyright Daniel Berthereau, 2018-2020
+* Copyright Daniel Berthereau, 2018-2021
 
 This project was supported in part by the University of California Office of the President MRPI funding MR-15-328710.
 
