@@ -16,8 +16,9 @@ your needs.
 
 It uses the resources of any [IIIF] compliant server. The full specification of
 the "International Image Interoperability Framework" standard is supported
-(level 2). If you don’t have an [IIPImage] server, Omeka S can be one! Just
-install the module [IIIF Server].
+(level 2). If you don’t have an IIIF-compatible image server, like [Cantaloupe]
+or [IIP Image] server, Omeka S can be one! Just install the module [IIIF Server]
+and [Image Server].
 
 It’s a lighter and themable alternative to the [Universal Viewer] or the [Mirador Viewer].
 
@@ -157,11 +158,13 @@ This project was supported in part by the University of California Office of the
 [Omeka S]: https://omeka.org/s
 [Omeka]: https://omeka.org
 [IIIF Server]: https://gitlab.com/Daniel-KM/Omeka-S-module-IiifServer
+[Image Server]: https://gitlab.com/Daniel-KM/Omeka-S-module-ImageServer
 [IIIF]: http://iiif.io
-[IIPImage]: http://iipimage.sourceforge.net
+[Cantaloupe]: https://cantaloupe-project.github.io
+[IIP Image]: http://iipimage.sourceforge.net
 [Universal Viewer]: https://gitlab.com/Daniel-KM/Omeka-S-module-UniversalViewer
 [Mirador Viewer]: https://gitlab.com/Daniel-KM/Omeka-S-module-Mirador
-[`Diva.zip`]: https://gitlab.com/Daniel-KM/Omeka-S-module-Diva/-/releases
+[Diva.zip]: https://gitlab.com/Daniel-KM/Omeka-S-module-Diva/-/releases
 [iiif specifications]: http://iiif.io/api/
 [module issues]: https://gitlab.com/Daniel-KM/Omeka-S-module-Diva/-/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
