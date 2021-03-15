@@ -49,32 +49,40 @@ the module to `Diva`, and go to the root module, and run:
 composer install --no-dev
 ```
 
-* Configuration
-
 Then install it like any other Omeka module.
 
-If you don’t have an IIIF Server, install the module [IIIF Server].
+* Access to IIIF images
+
+Diva viewer is based on IIIF, so an image server compliant with this protocol is
+required to use it. So, install the module [Image Server] if needed.
 
 If you need to display big images (bigger than 1 to 10 MB according to your
-server and your network), use an external image server, or create tiles with [IIIF Server].
-The tiling means that big images like maps and deep paintings, and any other
-images, are converted into tiles in order to load and zoom them instantly.
-
-Only one option can be set in the main config (the manifest property, if any).
-The other ones can be set differently for each site via the theme:
-
-- via the theme of the site: copy file `view/common/helper/diva.phtml` in your
-  theme and customize it;
-- via the theme of the site and the assets (`asset/vendor/diva`).
-
-See below the notes for more info.
+server, your network, and your users), use an external image server, or create
+tiles with [Image Server]. The tiling means that big images like maps and deep
+paintings, and any other images, are converted into tiles in order to load and
+zoom them instantly.
 
 
 Usage
 -----
 
+### Configuration
+
+The url of the manifest of the items should be set inside the property specified
+in the config form of the module. If you don’t have an IIIF Server, install the
+module [IIIF Server].
+
+To config Diva:
+
+- via the theme of the site: copy file `view/common/helper/diva.phtml` in your
+  theme and customize it;
+- via the theme of the site and the assets (`asset/vendor/diva`).
+
+### Display
+
 If the [IIIF Server] is installed, all resources of Omeka S are automatically
-available by Diva.
+available by the viewer, else the url of the manifest should be set in the
+configured property.
 
 The viewer is always available at `http://www.example.com/item/{item id}/diva`.
 Furthermore, it is automatically embedded "item/{id}" show and/or browse pages.
