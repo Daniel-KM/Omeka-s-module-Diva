@@ -138,10 +138,10 @@ class Diva extends AbstractHelper
         ];
 
         $config['locale'] = $view->identity()
-            ? $view->userSetting('locale')
+            ? (string) $view->userSetting('locale')
             : ($view->params()->fromRoute('__SITE__')
-                ? $view->siteSetting('locale')
-                : $view->setting('locale'));
+                ? (string) $view->siteSetting('locale')
+                : (string) $view->setting('locale'));
 
         switch ($resourceName) {
             case 'items':
